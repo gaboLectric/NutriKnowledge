@@ -1,0 +1,35 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Book base -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M34,30 L74,30 C76,30 78,32 78,34 L78,78 C78,80 76,82 74,82 L34,82 C32,82 30,80 30,78 L30,34 C30,32 32,30 34,30 Z"/>
+    
+    <!-- Book pages -->
+    <path
+        android:fillColor="#EEEEEE"
+        android:pathData="M35,33 L73,33 L73,79 L35,79 Z"/>
+    
+    <!-- Apple symbol -->
+    <path
+        android:fillColor="#00D4B0"
+        android:pathData="M54,45 C58,45 61,48 61,52 C61,56 58,59 54,59 C50,59 47,56 47,52 C47,48 50,45 54,45 Z"/>
+    
+    <!-- Leaf -->
+    <path
+        android:fillColor="#00FFD1"
+        android:pathData="M54,42 C56,40 58,41 59,43 C57,44 55,44 54,42 Z"/>
+    
+    <!-- Text lines -->
+    <path
+        android:fillColor="#CCCCCC"
+        android:pathData="M40,65 L68,65 L68,67 L40,67 Z"/>
+    <path
+        android:fillColor="#CCCCCC"
+        android:pathData="M40,70 L68,70 L68,72 L40,72 Z"/>
+</vector>
