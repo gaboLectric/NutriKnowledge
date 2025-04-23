@@ -27,7 +27,8 @@ public class HighlightsActivity extends AppCompatActivity {
         List<HighlightUtils.HighlightItem> highlights = HighlightUtils.getHighlights(prefs);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         for (HighlightUtils.HighlightItem h : highlights) {
-            adapter.add(h.text);
+            String display = h.text + "\n[" + ("underline".equals(h.type) ? "Underline" : "Highlight") + "]\n" + h.topicTitle;
+            adapter.add(display);
         }
         listView.setAdapter(adapter);
 
@@ -52,7 +53,10 @@ public class HighlightsActivity extends AppCompatActivity {
                         highlights.remove(position);
                         HighlightUtils.saveHighlights(prefs, highlights);
                         adapter.clear();
-                        for (HighlightUtils.HighlightItem h : highlights) adapter.add(h.text);
+                        for (HighlightUtils.HighlightItem h : highlights) {
+                            String display = h.text + "\n[" + ("underline".equals(h.type) ? "Underline" : "Highlight") + "]\n" + h.topicTitle;
+                            adapter.add(display);
+                        }
                         adapter.notifyDataSetChanged();
                     })
                     .show();

@@ -10,6 +10,7 @@ import android.text.Selection;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.BackgroundColorSpan;
+import android.text.style.UnderlineSpan;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
@@ -67,12 +68,21 @@ public class ContentActivity extends AppCompatActivity {
         if (!highlights.isEmpty()) {
             SpannableString spannable = new SpannableString(content);
             for (HighlightUtils.HighlightItem h : highlights) {
+                if (h.text == null || h.text.isEmpty()) continue; // skip empty
                 int start = content.indexOf(h.text);
                 while (start >= 0) {
                     int end = start + h.text.length();
-                    int color = android.graphics.Color.parseColor(h.color);
-                    spannable.setSpan(new BackgroundColorSpan(color), start, end, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    start = content.indexOf(h.text, end);
+                    if (end > content.length()) break; // safety check
+                    if ("underline".equals(h.type)) {
+                        spannable.setSpan(new UnderlineSpan(), start, end, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    } else {
+                        int color = android.graphics.Color.parseColor(h.color);
+                        spannable.setSpan(new BackgroundColorSpan(color), start, end, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    }
+                    // Prevent infinite loop if h.text is not found again
+                    int nextStart = content.indexOf(h.text, end);
+                    if (nextStart == start) break;
+                    start = nextStart;
                 }
             }
             contentView.setText(spannable);
@@ -125,8 +135,7 @@ public class ContentActivity extends AppCompatActivity {
                         .setTitle("Highlight text?")
                         .setMessage(selectedText)
                         .setPositiveButton("Highlight", (dialog, which) -> {
-                            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ContentActivity.this);
-                            HighlightUtils.addHighlight(prefs, selectedText.toString(), "#FFF9C4", topicTitle, topicContent, topicUrl);
+                            HighlightUtils.addHighlight(prefs, selectedText.toString(), "#FFF9C4", topicTitle, topicContent, topicUrl, "highlight");
                             applyHighlights(contentView, prefs);
                         })
                         .setNegativeButton("Cancel", null)
@@ -141,13 +150,16 @@ public class ContentActivity extends AppCompatActivity {
                 int selEnd = contentView.getSelectionEnd();
                 if (selStart != selEnd) {
                     final CharSequence selectedText = contentView.getText().subSequence(Math.min(selStart, selEnd), Math.max(selStart, selEnd));
-                    String[] colors = {"Yellow", "Green", "Pink"};
-                    String[] colorVals = {"#FFF9C4", "#C8E6C9", "#F8BBD0"};
+                    String[] options = {"Yellow Highlight", "Green Highlight", "Pink Highlight", "Underline"};
+                    String[] colorVals = {"#FFF9C4", "#C8E6C9", "#F8BBD0", "#000000"};
                     new AlertDialog.Builder(ContentActivity.this)
-                        .setTitle("Choose highlight color")
-                        .setItems(colors, (dialog, which) -> {
-                            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ContentActivity.this);
-                            HighlightUtils.addHighlight(prefs, selectedText.toString(), colorVals[which], topicTitle, topicContent, topicUrl);
+                        .setTitle("Choose highlight type")
+                        .setItems(options, (dialog, which) -> {
+                            if (which == 3) {
+                                HighlightUtils.addHighlight(prefs, selectedText.toString(), "#000000", topicTitle, topicContent, topicUrl, "underline");
+                            } else {
+                                HighlightUtils.addHighlight(prefs, selectedText.toString(), colorVals[which], topicTitle, topicContent, topicUrl, "highlight");
+                            }
                             applyHighlights(contentView, prefs);
                         })
                         .setNegativeButton("Cancel", null)
@@ -176,13 +188,17 @@ public class ContentActivity extends AppCompatActivity {
             int selEnd = contentView.getSelectionEnd();
             if (selStart != selEnd) {
                 final CharSequence selectedText = contentView.getText().subSequence(Math.min(selStart, selEnd), Math.max(selStart, selEnd));
-                String[] colors = {"Yellow", "Green", "Pink"};
-                String[] colorVals = {"#FFF9C4", "#C8E6C9", "#F8BBD0"};
+                String[] options = {"Yellow Highlight", "Green Highlight", "Pink Highlight", "Underline"};
+                String[] colorVals = {"#FFF9C4", "#C8E6C9", "#F8BBD0", "#000000"};
                 new AlertDialog.Builder(ContentActivity.this)
-                    .setTitle("Choose highlight color")
-                    .setItems(colors, (dialog, which) -> {
+                    .setTitle("Choose highlight type")
+                    .setItems(options, (dialog, which) -> {
                         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ContentActivity.this);
-                        HighlightUtils.addHighlight(prefs, selectedText.toString(), colorVals[which], topicTitle, topicContent, topicUrl);
+                        if (which == 3) {
+                            HighlightUtils.addHighlight(prefs, selectedText.toString(), "#000000", topicTitle, topicContent, topicUrl, "underline");
+                        } else {
+                            HighlightUtils.addHighlight(prefs, selectedText.toString(), colorVals[which], topicTitle, topicContent, topicUrl, "highlight");
+                        }
                         applyHighlights(contentView, prefs);
                     })
                     .setNegativeButton("Cancel", null)
@@ -200,12 +216,21 @@ public class ContentActivity extends AppCompatActivity {
         List<HighlightUtils.HighlightItem> highlights = HighlightUtils.getHighlightsForContent(prefs, content);
         SpannableString spannable = new SpannableString(content);
         for (HighlightUtils.HighlightItem h : highlights) {
+            if (h.text == null || h.text.isEmpty()) continue; // skip empty
             int start = content.indexOf(h.text);
             while (start >= 0) {
                 int end = start + h.text.length();
-                int color = android.graphics.Color.parseColor(h.color);
-                spannable.setSpan(new BackgroundColorSpan(color), start, end, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
-                start = content.indexOf(h.text, end);
+                if (end > content.length()) break; // safety check
+                if ("underline".equals(h.type)) {
+                    spannable.setSpan(new UnderlineSpan(), start, end, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
+                } else {
+                    int color = android.graphics.Color.parseColor(h.color);
+                    spannable.setSpan(new BackgroundColorSpan(color), start, end, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+                // Prevent infinite loop if h.text is not found again
+                int nextStart = content.indexOf(h.text, end);
+                if (nextStart == start) break;
+                start = nextStart;
             }
         }
         contentView.setText(spannable);
