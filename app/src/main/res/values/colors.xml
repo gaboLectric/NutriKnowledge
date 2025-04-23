@@ -14,4 +14,9 @@
     <color name="on_surface">#222222</color>
     <color name="highlight_green">#C8E6C9</color>
     <color name="highlight_pink">#F8BBD0</color>
+    <color name="sky_blue">#8ECAE6</color>
+    <color name="blue_green">#219EBC</color>
+    <color name="prussian_blue">#023047</color>
+    <color name="selective_yellow">#FFB703</color>
+    <color name="ut_orange">#FB8500</color>
 </resources>

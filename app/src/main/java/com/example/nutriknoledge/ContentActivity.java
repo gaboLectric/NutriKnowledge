@@ -3,6 +3,7 @@ package com.example.nutriknoledge;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -175,39 +176,13 @@ public class ContentActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        // No inflamos ningún menú para eliminar los botones extra
+        return false;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_highlight) {
-            TextView contentView = findViewById(R.id.themeContent);
-            int selStart = contentView.getSelectionStart();
-            int selEnd = contentView.getSelectionEnd();
-            if (selStart != selEnd) {
-                final CharSequence selectedText = contentView.getText().subSequence(Math.min(selStart, selEnd), Math.max(selStart, selEnd));
-                String[] options = {"Yellow Highlight", "Green Highlight", "Pink Highlight", "Underline"};
-                String[] colorVals = {"#FFF9C4", "#C8E6C9", "#F8BBD0", "#000000"};
-                new AlertDialog.Builder(ContentActivity.this)
-                    .setTitle("Choose highlight type")
-                    .setItems(options, (dialog, which) -> {
-                        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ContentActivity.this);
-                        if (which == 3) {
-                            HighlightUtils.addHighlight(prefs, selectedText.toString(), "#000000", topicTitle, topicContent, topicUrl, "underline");
-                        } else {
-                            HighlightUtils.addHighlight(prefs, selectedText.toString(), colorVals[which], topicTitle, topicContent, topicUrl, "highlight");
-                        }
-                        applyHighlights(contentView, prefs);
-                    })
-                    .setNegativeButton("Cancel", null)
-                    .show();
-            } else {
-                Toast.makeText(ContentActivity.this, "Select text to highlight", Toast.LENGTH_SHORT).show();
-            }
-            return true;
-        }
+        // Solo dejamos la navegación hacia atrás
         return super.onOptionsItemSelected(item);
     }
 
@@ -215,6 +190,7 @@ public class ContentActivity extends AppCompatActivity {
         String content = contentView.getText().toString();
         List<HighlightUtils.HighlightItem> highlights = HighlightUtils.getHighlightsForContent(prefs, content);
         SpannableString spannable = new SpannableString(content);
+        boolean isDark = (getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
         for (HighlightUtils.HighlightItem h : highlights) {
             if (h.text == null || h.text.isEmpty()) continue; // skip empty
             int start = content.indexOf(h.text);
@@ -224,10 +200,23 @@ public class ContentActivity extends AppCompatActivity {
                 if ("underline".equals(h.type)) {
                     spannable.setSpan(new UnderlineSpan(), start, end, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
                 } else {
-                    int color = android.graphics.Color.parseColor(h.color);
+                    int color;
+                    if (isDark) {
+                        // Use more transparent highlights for dark mode
+                        if (h.color.equals("#FFF9C4") || h.color.equalsIgnoreCase("@color/highlight_bg")) {
+                            color = android.graphics.Color.parseColor("#33FFF9C4"); // 20% transparent yellow
+                        } else if (h.color.equals("#C8E6C9")) {
+                            color = android.graphics.Color.parseColor("#33C8E6C9"); // 20% transparent green
+                        } else if (h.color.equals("#F8BBD0")) {
+                            color = android.graphics.Color.parseColor("#33F8BBD0"); // 20% transparent pink
+                        } else {
+                            color = android.graphics.Color.parseColor(h.color);
+                        }
+                    } else {
+                        color = android.graphics.Color.parseColor(h.color);
+                    }
                     spannable.setSpan(new BackgroundColorSpan(color), start, end, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
-                // Prevent infinite loop if h.text is not found again
                 int nextStart = content.indexOf(h.text, end);
                 if (nextStart == start) break;
                 start = nextStart;

@@ -4,7 +4,12 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import java.util.List;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import java.util.Collections;
 import android.widget.ListView;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -25,44 +30,66 @@ public class HighlightsActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.highlightsList);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         List<HighlightUtils.HighlightItem> highlights = HighlightUtils.getHighlights(prefs);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
-        for (HighlightUtils.HighlightItem h : highlights) {
-            String display = h.text + "\n[" + ("underline".equals(h.type) ? "Underline" : "Highlight") + "]\n" + h.topicTitle;
-            adapter.add(display);
-        }
+        // Show most recent first, underlines first
+        Collections.reverse(highlights);
+        Collections.sort(highlights, (a, b) -> {
+            if ("underline".equals(b.type) && !"underline".equals(a.type)) return 1;
+            if ("underline".equals(a.type) && !"underline".equals(b.type)) return -1;
+            return 0;
+        });
+        HighlightsAdapter adapter = new HighlightsAdapter(this, highlights);
         listView.setAdapter(adapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, android.view.View view, int position, long id) {
-                HighlightUtils.HighlightItem highlight = highlights.get(position);
-                new AlertDialog.Builder(HighlightsActivity.this)
-                    .setTitle("Highlight Options")
-                    .setMessage(highlight.text)
-                    .setPositiveButton("Go to Text", (dialog, which) -> {
-                        Intent intent = new Intent(HighlightsActivity.this, ContentActivity.class);
-                        intent.putExtra("highlight_text", highlight.text);
-                        intent.putExtra("highlight_color", highlight.color);
-                        intent.putExtra("TOPIC_TITLE", highlight.topicTitle);
-                        intent.putExtra("TOPIC_CONTENT", highlight.topicContent);
-                        intent.putExtra("TOPIC_URL", highlight.topicUrl);
-                        startActivity(intent);
-                    })
-                    .setNegativeButton("Cancel", null)
-                    .setNeutralButton("Delete", (dialog, which) -> {
-                        highlights.remove(position);
-                        HighlightUtils.saveHighlights(prefs, highlights);
-                        adapter.clear();
-                        for (HighlightUtils.HighlightItem h : highlights) {
-                            String display = h.text + "\n[" + ("underline".equals(h.type) ? "Underline" : "Highlight") + "]\n" + h.topicTitle;
-                            adapter.add(display);
-                        }
-                        adapter.notifyDataSetChanged();
-                    })
-                    .show();
-            }
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            HighlightUtils.HighlightItem highlight = highlights.get(position);
+            new AlertDialog.Builder(HighlightsActivity.this)
+                .setTitle("Highlight Options")
+                .setMessage(highlight.text)
+                .setPositiveButton("Go to Text", (dialog, which) -> {
+                    Intent intent = new Intent(HighlightsActivity.this, ContentActivity.class);
+                    intent.putExtra("highlight_text", highlight.text);
+                    intent.putExtra("highlight_color", highlight.color);
+                    intent.putExtra("TOPIC_TITLE", highlight.topicTitle);
+                    intent.putExtra("TOPIC_CONTENT", highlight.topicContent);
+                    intent.putExtra("TOPIC_URL", highlight.topicUrl);
+                    startActivity(intent);
+                })
+                .setNegativeButton("Cancel", null)
+                .setNeutralButton("Delete", (dialog, which) -> {
+                    highlights.remove(position);
+                    HighlightUtils.saveHighlights(prefs, highlights);
+                    adapter.notifyDataSetChanged();
+                })
+                .show();
         });
     }
+
+    static class HighlightsAdapter extends BaseAdapter {
+        private final List<HighlightUtils.HighlightItem> items;
+        private final LayoutInflater inflater;
+        HighlightsAdapter(android.content.Context ctx, List<HighlightUtils.HighlightItem> items) {
+            this.items = items;
+            this.inflater = LayoutInflater.from(ctx);
+        }
+        @Override
+        public int getCount() { return items.size(); }
+        @Override
+        public Object getItem(int position) { return items.get(position); }
+        @Override
+        public long getItemId(int position) { return position; }
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View v = convertView;
+            if (v == null) v = inflater.inflate(R.layout.highlight_item, parent, false);
+            HighlightUtils.HighlightItem item = items.get(position);
+            TextView topic = v.findViewById(R.id.highlight_topic);
+            TextView text = v.findViewById(R.id.highlight_text);
+            topic.setText(item.topicTitle);
+            text.setText(item.text);
+            return v;
+        }
+    }
+
     @Override
     public boolean onSupportNavigateUp() {
         finish();
