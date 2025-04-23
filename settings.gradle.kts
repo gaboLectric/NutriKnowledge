@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "NutriKnoledge"
+rootProject.name = "NutriKnowledge"
 include(":app")
