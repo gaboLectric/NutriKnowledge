@@ -9,26 +9,39 @@
     android:gravity="center_vertical"
     android:elevation="6dp">
 
-    <!-- 10 color circles -->
-    <View android:id="@+id/color_yellow" android:layout_width="32dp" android:layout_height="32dp" android:layout_marginEnd="4dp" android:background="@drawable/circle_yellow" />
-    <View android:id="@+id/color_green" android:layout_width="32dp" android:layout_height="32dp" android:layout_marginEnd="4dp" android:background="@drawable/circle_green" />
-    <View android:id="@+id/color_blue" android:layout_width="32dp" android:layout_height="32dp" android:layout_marginEnd="4dp" android:background="@drawable/circle_blue" />
-    <View android:id="@+id/color_orange" android:layout_width="32dp" android:layout_height="32dp" android:layout_marginEnd="4dp" android:background="@drawable/circle_orange" />
-    <View android:id="@+id/color_pink" android:layout_width="32dp" android:layout_height="32dp" android:layout_marginEnd="4dp" android:background="@drawable/circle_pink" />
-    <View android:id="@+id/color_teal" android:layout_width="32dp" android:layout_height="32dp" android:layout_marginEnd="4dp" android:background="@drawable/circle_teal" />
-    <View android:id="@+id/color_purple" android:layout_width="32dp" android:layout_height="32dp" android:layout_marginEnd="4dp" android:background="@drawable/circle_purple" />
-    <View android:id="@+id/color_red" android:layout_width="32dp" android:layout_height="32dp" android:layout_marginEnd="4dp" android:background="@drawable/circle_red" />
-    <View android:id="@+id/color_brown" android:layout_width="32dp" android:layout_height="32dp" android:layout_marginEnd="4dp" android:background="@drawable/circle_brown" />
-    <View android:id="@+id/color_gray" android:layout_width="32dp" android:layout_height="32dp" android:layout_marginEnd="12dp" android:background="@drawable/circle_gray" />
-
-    <!-- Copy icon -->
+    <!-- Copy icon always visible -->
     <ImageButton
         android:id="@+id/btn_copy"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:background="@android:color/transparent"
         android:src="@drawable/ic_copy"
         android:contentDescription="@string/copy"
-        android:tint="@color/blue_green" />
+        android:tint="@color/blue_green"
+        android:layout_marginEnd="16dp" />
+
+    <!-- Horizontal scroll for color circles -->
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <!-- 10 color circles -->
+            <View android:id="@+id/color_yellow" android:layout_width="32dp" android:layout_height="32dp" android:layout_marginEnd="4dp" android:background="@drawable/circle_yellow" />
+            <View android:id="@+id/color_green" android:layout_width="32dp" android:layout_height="32dp" android:layout_marginEnd="4dp" android:background="@drawable/circle_green" />
+            <View android:id="@+id/color_blue" android:layout_width="32dp" android:layout_height="32dp" android:layout_marginEnd="4dp" android:background="@drawable/circle_blue" />
+            <View android:id="@+id/color_orange" android:layout_width="32dp" android:layout_height="32dp" android:layout_marginEnd="4dp" android:background="@drawable/circle_orange" />
+            <View android:id="@+id/color_pink" android:layout_width="32dp" android:layout_height="32dp" android:layout_marginEnd="4dp" android:background="@drawable/circle_pink" />
+            <View android:id="@+id/color_teal" android:layout_width="32dp" android:layout_height="32dp" android:layout_marginEnd="4dp" android:background="@drawable/circle_teal" />
+            <View android:id="@+id/color_purple" android:layout_width="32dp" android:layout_height="32dp" android:layout_marginEnd="4dp" android:background="@drawable/circle_purple" />
+            <View android:id="@+id/color_red" android:layout_width="32dp" android:layout_height="32dp" android:layout_marginEnd="4dp" android:background="@drawable/circle_red" />
+            <View android:id="@+id/color_brown" android:layout_width="32dp" android:layout_height="32dp" android:layout_marginEnd="4dp" android:background="@drawable/circle_brown" />
+            <View android:id="@+id/color_gray" android:layout_width="32dp" android:layout_height="32dp" android:layout_marginEnd="12dp" android:background="@drawable/circle_gray" />
+        </LinearLayout>
+    </HorizontalScrollView>
 
 </LinearLayout>
