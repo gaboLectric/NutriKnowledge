@@ -86,6 +86,12 @@ public class HighlightsActivity extends AppCompatActivity {
             TextView text = v.findViewById(R.id.highlight_text);
             topic.setText(item.topicTitle);
             text.setText(item.text);
+            // Quitar color de fondo amarillo y usar color de tema (claro/oscuro)
+            v.setBackgroundResource(R.color.highlight_bg);
+            // Opcional: puedes ajustar el color del texto si el highlight era amarillo
+            // if (item.color != null && item.color.equals("#FFF9C4")) {
+            //     text.setTextColor(ContextCompat.getColor(v.getContext(), R.color.on_surface));
+            // }
             return v;
         }
     }
