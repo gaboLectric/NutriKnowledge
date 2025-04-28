@@ -65,8 +65,29 @@ public class ContentActivity extends AppCompatActivity {
             titleView.setText(topicTitle);
         }
         if (topicContent != null) {
-            contentView.setText(topicContent);
+    // Si topicContent contiene 'Subtemas:', separar descripción y subtemas
+    if (topicContent.contains("Subtemas:")) {
+        String[] partes = topicContent.split("Subtemas:", 2);
+        String descripcion = partes[0].trim();
+        String subtemas = partes.length > 1 ? partes[1].trim() : "";
+        StringBuilder builder = new StringBuilder();
+        builder.append(descripcion).append("\n\n");
+        if (!subtemas.isEmpty()) {
+            builder.append("Subtemas:\n");
+            // Separar por comas o puntos y coma
+            String[] lista = subtemas.split(",|;|\n");
+            for (String subtema : lista) {
+                subtema = subtema.trim();
+                if (!subtema.isEmpty()) {
+                    builder.append("• ").append(subtema).append("\n");
+                }
+            }
         }
+        contentView.setText(builder.toString().trim());
+    } else {
+        contentView.setText(topicContent);
+    }
+}
         readMoreBtn.setOnClickListener(v -> {
             if (topicUrl != null) {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(topicUrl));

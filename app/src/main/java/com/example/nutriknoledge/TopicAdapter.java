@@ -45,6 +45,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ContentActivity.class);
             intent.putExtra("TOPIC_TITLE", topic.title);
+            intent.putExtra("TOPIC_CONTENT", topic.description);
             context.startActivity(intent);
         });
     }

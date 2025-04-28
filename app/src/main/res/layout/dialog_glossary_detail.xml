@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/detailTerm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:text="Término"/>
+
+    <TextView
+        android:id="@+id/detailCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="#888"
+        android:text="Categoría"/>
+
+    <TextView
+        android:id="@+id/detailDefinition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="12dp"
+        android:text="Definición"/>
+</LinearLayout>

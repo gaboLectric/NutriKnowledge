@@ -1,26 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_theme_1" android:title="Theme 1" />
-        <item android:id="@+id/nav_theme_2" android:title="Theme 2" />
-        <item android:id="@+id/nav_theme_3" android:title="Theme 3" />
-        <item android:id="@+id/nav_theme_4" android:title="Theme 4" />
-        <item android:id="@+id/nav_theme_5" android:title="Theme 5" />
-        <item android:id="@+id/nav_theme_6" android:title="Theme 6" />
-        <item android:id="@+id/nav_theme_7" android:title="Theme 7" />
-        <item android:id="@+id/nav_theme_8" android:title="Theme 8" />
-        <item android:id="@+id/nav_theme_9" android:title="Theme 9" />
-        <item android:id="@+id/nav_theme_10" android:title="Theme 10" />
-        <item android:id="@+id/nav_theme_11" android:title="Theme 11" />
-        <item android:id="@+id/nav_theme_12" android:title="Theme 12" />
-        <item android:id="@+id/nav_theme_13" android:title="Theme 13" />
-        <item android:id="@+id/nav_theme_14" android:title="Theme 14" />
-        <item android:id="@+id/nav_theme_15" android:title="Theme 15" />
-        <item android:id="@+id/nav_theme_16" android:title="Theme 16" />
-        <item android:id="@+id/nav_theme_17" android:title="Theme 17" />
-        <item android:id="@+id/nav_theme_18" android:title="Theme 18" />
-        <item android:id="@+id/nav_theme_19" android:title="Theme 19" />
-        <item android:id="@+id/nav_theme_20" android:title="Theme 20" />
+
         <item
             android:id="@+id/nav_settings"
             android:title="Configuration"
@@ -32,6 +13,12 @@
             android:title="Highlights"
             android:icon="@android:drawable/ic_menu_save"
             android:orderInCategory="101"
+            android:showAsAction="never" />
+        <item
+            android:id="@+id/nav_glossary"
+            android:title="Glosario"
+            android:icon="@android:drawable/ic_menu_info_details"
+            android:orderInCategory="102"
             android:showAsAction="never" />
     </group>
 </menu>

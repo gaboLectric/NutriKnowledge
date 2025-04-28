@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="18dp"
+        android:paddingRight="8dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="?android:attr/selectableItemBackground">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/glossaryTerm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#222222"
+                android:fontFamily="sans-serif-medium"
+                android:text="Término"/>
+            <TextView
+                android:id="@+id/glossaryCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#2196F3"
+                android:fontFamily="sans-serif"
+                android:text="Categoría"
+                android:layout_marginTop="1dp"/>
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/favoriteButton"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_favorite_border"
+            android:contentDescription="Favorito"
+            android:scaleType="centerInside"
+            android:tint="#FF9800"
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E3EAF2" />
+
+</LinearLayout>

@@ -56,36 +56,36 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         
         List<TopicAdapter.TopicItem> topics = new ArrayList<>();
         topics.add(new TopicAdapter.TopicItem(
-            "Basic Nutrition Principles",
-            "Learn about macronutrients, micronutrients, and the foundations of nutrition science"
+            "Principios básicos de la nutrición",
+            "Estudia los fundamentos de la nutrición, incluyendo: macronutrientes (carbohidratos, proteínas, grasas), micronutrientes (vitaminas, minerales), hidratación y requerimientos diarios. Subtemas: Guías alimentarias, balance energético, funciones y fuentes de nutrientes."
         ));
         topics.add(new TopicAdapter.TopicItem(
-            "Anatomy and Physiology",
-            "Understand the human body systems and their relationship with nutrition"
+            "Anatomía y fisiología",
+            "Comprende los sistemas del cuerpo humano y su relación con la nutrición. Subtemas: sistema digestivo, circulatorio, endocrino, absorción y metabolismo de nutrientes, órganos clave en la nutrición."
         ));
         topics.add(new TopicAdapter.TopicItem(
-            "Biochemistry and Metabolism",
-            "Study the chemical processes of digestion, absorption, and metabolism"
+            "Bioquímica y metabolismo",
+            "Analiza los procesos químicos de la digestión, absorción y metabolismo energético. Subtemas: glucólisis, ciclo de Krebs, metabolismo de lípidos y proteínas, regulación hormonal."
         ));
         topics.add(new TopicAdapter.TopicItem(
-            "Food Science",
-            "Explore food composition, preparation methods, and food safety"
+            "Ciencia de los alimentos",
+            "Explora la composición de los alimentos, métodos de preparación, conservación y seguridad alimentaria. Subtemas: etiquetado nutricional, aditivos, tecnología de alimentos, higiene y toxicología."
         ));
         topics.add(new TopicAdapter.TopicItem(
-            "Clinical Nutrition",
-            "Learn about medical nutrition therapy and dietary interventions"
+            "Nutrición clínica",
+            "Conoce la terapia nutricional médica y las intervenciones dietéticas para enfermedades. Subtemas: dietas terapéuticas, nutrición hospitalaria, evaluación del estado nutricional, soporte nutricional especializado."
         ));
         topics.add(new TopicAdapter.TopicItem(
-            "Community Nutrition",
-            "Study public health nutrition and community-based interventions"
+            "Nutrición comunitaria",
+            "Estudia la nutrición en salud pública y programas comunitarios. Subtemas: intervenciones alimentarias, educación nutricional, políticas públicas, programas escolares y comunitarios."
         ));
         topics.add(new TopicAdapter.TopicItem(
-            "Food Service Management",
-            "Learn about food service operations and institutional nutrition"
+            "Gestión de servicios de alimentos",
+            "Aprende sobre la operación de comedores, restaurantes y servicios institucionales. Subtemas: planificación de menús, normas de higiene y seguridad, gestión de recursos, control de calidad."
         ));
         topics.add(new TopicAdapter.TopicItem(
-            "Research Methods",
-            "Understand nutrition research methodology and evidence-based practice"
+            "Métodos de investigación en nutrición",
+            "Comprende la metodología de investigación y la práctica basada en evidencia. Subtemas: tipos de estudios, estadística básica, interpretación de resultados, revisión de literatura científica."
         ));
         
         TopicAdapter adapter = new TopicAdapter(this, topics);
@@ -107,94 +107,10 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(this, HighlightsActivity.class));
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
-        } else if (id == R.id.nav_theme_1) {
-            themeTitle = "Theme 1";
-            themeContent = "This is a detailed description for Theme 1. Here you will learn about the basics of nutrition and its importance in daily life.";
-            themeUrl = "https://en.wikipedia.org/wiki/Nutrition";
-        } else if (id == R.id.nav_theme_2) {
-            themeTitle = "Theme 2";
-            themeContent = "Theme 2 covers the anatomy and physiology relevant to nutrition science.";
-            themeUrl = "https://en.wikipedia.org/wiki/Anatomy";
-        } else if (id == R.id.nav_theme_3) {
-            themeTitle = "Theme 3";
-            themeContent = "Theme 3 is about biochemistry and metabolism.";
-            themeUrl = "https://en.wikipedia.org/wiki/Biochemistry";
-        } else if (id == R.id.nav_theme_4) {
-            themeTitle = "Theme 4";
-            themeContent = "Theme 4 explores food science and technology.";
-            themeUrl = "https://en.wikipedia.org/wiki/Food_science";
-        } else if (id == R.id.nav_theme_5) {
-            themeTitle = "Theme 5";
-            themeContent = "Theme 5 focuses on clinical nutrition and patient care.";
-            themeUrl = "https://en.wikipedia.org/wiki/Clinical_nutrition";
-        } else if (id == R.id.nav_theme_6) {
-            themeTitle = "Theme 6";
-            themeContent = "Theme 6 introduces community nutrition programs.";
-            themeUrl = "https://en.wikipedia.org/wiki/Community_nutrition";
-        } else if (id == R.id.nav_theme_7) {
-            themeTitle = "Theme 7";
-            themeContent = "Theme 7 covers food service management.";
-            themeUrl = "https://en.wikipedia.org/wiki/Food_service";
-        } else if (id == R.id.nav_theme_8) {
-            themeTitle = "Theme 8";
-            themeContent = "Theme 8 is about research methods in nutrition.";
-            themeUrl = "https://en.wikipedia.org/wiki/Research_methods";
-        } else if (id == R.id.nav_theme_9) {
-            themeTitle = "Theme 9";
-            themeContent = "Theme 9 explores sports nutrition and performance.";
-            themeUrl = "https://en.wikipedia.org/wiki/Sports_nutrition";
-        } else if (id == R.id.nav_theme_10) {
-            themeTitle = "Theme 10";
-            themeContent = "Theme 10 covers pediatric nutrition.";
-            themeUrl = "https://en.wikipedia.org/wiki/Pediatric_nutrition";
-        } else if (id == R.id.nav_theme_11) {
-            themeTitle = "Theme 11";
-            themeContent = "Theme 11 is about geriatric nutrition.";
-            themeUrl = "https://en.wikipedia.org/wiki/Geriatrics";
-        } else if (id == R.id.nav_theme_12) {
-            themeTitle = "Theme 12";
-            themeContent = "Theme 12 covers nutrition assessment techniques.";
-            themeUrl = "https://en.wikipedia.org/wiki/Nutrition_assessment";
-        } else if (id == R.id.nav_theme_13) {
-            themeTitle = "Theme 13";
-            themeContent = "Theme 13 explores diet planning and counseling.";
-            themeUrl = "https://en.wikipedia.org/wiki/Diet_planning";
-        } else if (id == R.id.nav_theme_14) {
-            themeTitle = "Theme 14";
-            themeContent = "Theme 14 focuses on micronutrients and their role.";
-            themeUrl = "https://en.wikipedia.org/wiki/Micronutrient";
-        } else if (id == R.id.nav_theme_15) {
-            themeTitle = "Theme 15";
-            themeContent = "Theme 15 discusses macronutrients in detail.";
-            themeUrl = "https://en.wikipedia.org/wiki/Macronutrient";
-        } else if (id == R.id.nav_theme_16) {
-            themeTitle = "Theme 16";
-            themeContent = "Theme 16 is about public health nutrition policies.";
-            themeUrl = "https://en.wikipedia.org/wiki/Public_health";
-        } else if (id == R.id.nav_theme_17) {
-            themeTitle = "Theme 17";
-            themeContent = "Theme 17 explores food allergies and intolerances.";
-            themeUrl = "https://en.wikipedia.org/wiki/Food_allergy";
-        } else if (id == R.id.nav_theme_18) {
-            themeTitle = "Theme 18";
-            themeContent = "Theme 18 covers eating disorders and their management.";
-            themeUrl = "https://en.wikipedia.org/wiki/Eating_disorder";
-        } else if (id == R.id.nav_theme_19) {
-            themeTitle = "Theme 19";
-            themeContent = "Theme 19 discusses nutrition in chronic diseases.";
-            themeUrl = "https://en.wikipedia.org/wiki/Chronic_disease";
-        } else if (id == R.id.nav_theme_20) {
-            themeTitle = "Theme 20";
-            themeContent = "Theme 20 is about global nutrition challenges.";
-            themeUrl = "https://en.wikipedia.org/wiki/Global_nutrition";
-        }
-
-        if (themeTitle != null) {
-            Intent intent = new Intent(this, ContentActivity.class);
-            intent.putExtra("TOPIC_TITLE", themeTitle);
-            intent.putExtra("TOPIC_CONTENT", themeContent);
-            intent.putExtra("TOPIC_URL", themeUrl);
-            startActivity(intent);
+        } else if (id == R.id.nav_glossary) {
+            startActivity(new Intent(this, GlossaryActivity.class));
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return true;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

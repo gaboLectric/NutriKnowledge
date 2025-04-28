@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="#F9FBFF"
+    android:alpha="0.96"
+    android:paddingTop="10dp"
+    android:paddingBottom="6dp">
+
+    <!-- Barra lateral azul/acento -->
+    <View
+        android:layout_width="4dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center_vertical"
+        android:background="#2196F3"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="12dp" />
+
+    <TextView
+        android:id="@+id/categoryHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#2196F3"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:textAllCaps="true"
+        android:fontFamily="sans-serif-medium"
+        android:letterSpacing="0.08"
+        android:text="Categoría"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E3EAF2"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="8dp" />
+
+</LinearLayout>

@@ -41,6 +41,10 @@
             android:name=".HighlightsActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".GlossaryActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
