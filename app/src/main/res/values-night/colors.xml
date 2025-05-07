@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#006D77</color>
-    <color name="primary_variant">#0093B8</color>
-    <color name="primary_dark">#004D40</color>
-    <color name="secondary">#00FFD1</color>
-    <color name="secondary_variant">#00D4B0</color>
-    <color name="background">#121212</color>
-    <color name="surface">#1E1E1E</color>
+    <color name="primary">#90CAF9</color>
+    <color name="primary_dark">#1976D2</color>
+    <color name="primary_light">#2196F3</color>
+    <color name="secondary">#FFD54F</color>
+    <color name="secondary_dark">#FFA000</color>
+    <color name="secondary_light">#FFF8E1</color>
+    <color name="background">#000000</color>
+    <color name="surface">#121212</color>
+    <color name="card_background">#121212</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#B3B3B3</color>
+    <color name="text_hint">#888888</color>
     <color name="error">#CF6679</color>
-    <color name="on_primary">#FFFFFF</color>
-    <color name="on_secondary">#000000</color>
-    <color name="on_background">#FFFFFF</color>
-    <color name="on_surface">#FFFFFF</color>
-    <color name="on_error">#000000</color>
-    <color name="sky_blue">#8ECAE6</color>
-    <color name="blue_green">#219EBC</color>
-    <color name="prussian_blue">#023047</color>
-    <color name="selective_yellow">#FFB703</color>
-    <color name="ut_orange">#FB8500</color>
-    <color name="highlight_bg">#373737</color>
-    <color name="highlight_green">#1B5E20</color>
-    <color name="highlight_pink">#880E4F</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray">#B3B3B3</color>
+    <color name="bottom_nav_item_color">#90CAF9</color>
+    <!-- Colores de resaltado -->
+    <color name="highlight_yellow">#FFF59D</color>
+    <color name="highlight_green">#A5D6A7</color>
+    <color name="highlight_pink">#F48FB1</color>
+    <color name="highlight_blue">#90CAF9</color>
+    <color name="highlight_orange">#FFCC80</color>
+    <color name="highlight_purple">#CE93D8</color>
+    <color name="highlight_teal">#80CBC4</color>
+    <color name="highlight_red">#EF9A9A</color>
+    <color name="highlight_brown">#BCAAA4</color>
+    <color name="highlight_gray">#424242</color>
 </resources>

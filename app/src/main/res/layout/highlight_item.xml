@@ -1,34 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@color/highlight_bg"
-    android:layout_margin="8dp"
-    android:elevation="2dp"
-    android:clipToOutline="true"
-    android:backgroundTintMode="src_over"
-    android:backgroundTint="@color/highlight_bg">
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="4dp"
+    app:cardBackgroundColor="?android:attr/colorBackground"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp"
+    app:strokeColor="?android:attr/textColorPrimary"
+    app:strokeWidth="1dp">
 
-    <TextView
-        android:id="@+id/highlight_topic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/blue_green"
-        android:textSize="16sp"/>
-    <TextView
-        android:id="@+id/highlight_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/on_surface"
-        android:textSize="15sp"
-        android:layout_marginTop="4dp"/>
-
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/blue_green"
-        android:layout_marginTop="8dp"/>
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/topicTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.App.Subtitle"
+            android:textColor="?android:attr/textColorPrimary"/>
+
+        <TextView
+            android:id="@+id/highlightTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.App.Body"
+            android:textColor="?android:attr/textColorPrimary"/>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -17,7 +17,7 @@
         android:background="@android:color/transparent"
         android:src="@drawable/ic_copy"
         android:contentDescription="@string/copy"
-        android:tint="@color/blue_green"
+        android:tint="@color/primary"
         android:layout_marginEnd="16dp" />
 
     <!-- Horizontal scroll for color circles -->

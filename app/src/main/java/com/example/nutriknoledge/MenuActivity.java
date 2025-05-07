@@ -13,6 +13,12 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,42 +60,31 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     private void setupRecyclerView() {
         menuRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         
-        List<TopicAdapter.TopicItem> topics = new ArrayList<>();
-        topics.add(new TopicAdapter.TopicItem(
-            "Principios básicos de la nutrición",
-            "Estudia los fundamentos de la nutrición, incluyendo: macronutrientes (carbohidratos, proteínas, grasas), micronutrientes (vitaminas, minerales), hidratación y requerimientos diarios. Subtemas: Guías alimentarias, balance energético, funciones y fuentes de nutrientes."
-        ));
-        topics.add(new TopicAdapter.TopicItem(
-            "Anatomía y fisiología",
-            "Comprende los sistemas del cuerpo humano y su relación con la nutrición. Subtemas: sistema digestivo, circulatorio, endocrino, absorción y metabolismo de nutrientes, órganos clave en la nutrición."
-        ));
-        topics.add(new TopicAdapter.TopicItem(
-            "Bioquímica y metabolismo",
-            "Analiza los procesos químicos de la digestión, absorción y metabolismo energético. Subtemas: glucólisis, ciclo de Krebs, metabolismo de lípidos y proteínas, regulación hormonal."
-        ));
-        topics.add(new TopicAdapter.TopicItem(
-            "Ciencia de los alimentos",
-            "Explora la composición de los alimentos, métodos de preparación, conservación y seguridad alimentaria. Subtemas: etiquetado nutricional, aditivos, tecnología de alimentos, higiene y toxicología."
-        ));
-        topics.add(new TopicAdapter.TopicItem(
-            "Nutrición clínica",
-            "Conoce la terapia nutricional médica y las intervenciones dietéticas para enfermedades. Subtemas: dietas terapéuticas, nutrición hospitalaria, evaluación del estado nutricional, soporte nutricional especializado."
-        ));
-        topics.add(new TopicAdapter.TopicItem(
-            "Nutrición comunitaria",
-            "Estudia la nutrición en salud pública y programas comunitarios. Subtemas: intervenciones alimentarias, educación nutricional, políticas públicas, programas escolares y comunitarios."
-        ));
-        topics.add(new TopicAdapter.TopicItem(
-            "Gestión de servicios de alimentos",
-            "Aprende sobre la operación de comedores, restaurantes y servicios institucionales. Subtemas: planificación de menús, normas de higiene y seguridad, gestión de recursos, control de calidad."
-        ));
-        topics.add(new TopicAdapter.TopicItem(
-            "Métodos de investigación en nutrición",
-            "Comprende la metodología de investigación y la práctica basada en evidencia. Subtemas: tipos de estudios, estadística básica, interpretación de resultados, revisión de literatura científica."
-        ));
-        
-        TopicAdapter adapter = new TopicAdapter(this, topics);
-        menuRecyclerView.setAdapter(adapter);
+        try {
+            // Leer el archivo JSON
+            InputStream is = getAssets().open("Bd.json");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            StringBuilder jsonString = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                jsonString.append(line);
+            }
+            reader.close();
+
+            // Parsear el JSON
+            Gson gson = new Gson();
+            Type listType = new TypeToken<ArrayList<TopicData>>(){}.getType();
+            List<TopicData> topics = gson.fromJson(jsonString.toString(), listType);
+
+            // Configurar el adaptador
+            TopicAdapter adapter = new TopicAdapter(this, topics);
+            menuRecyclerView.setAdapter(adapter);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // En caso de error, mostrar una lista vacía
+            TopicAdapter adapter = new TopicAdapter(this, new ArrayList<>());
+            menuRecyclerView.setAdapter(adapter);
+        }
     }
 
     @Override

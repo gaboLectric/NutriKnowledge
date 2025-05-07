@@ -11,20 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHolder> {
-    private final Context context;
-    private final List<TopicItem> topics;
+    private List<TopicData> topics;
+    private Context context;
 
-    public static class TopicItem {
-        String title;
-        String description;
-
-        public TopicItem(String title, String description) {
-            this.title = title;
-            this.description = description;
-        }
-    }
-
-    public TopicAdapter(Context context, List<TopicItem> topics) {
+    public TopicAdapter(Context context, List<TopicData> topics) {
         this.context = context;
         this.topics = topics;
     }
@@ -38,31 +28,50 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
 
     @Override
     public void onBindViewHolder(@NonNull TopicViewHolder holder, int position) {
-        TopicItem topic = topics.get(position);
-        holder.titleText.setText(topic.title);
-        holder.descriptionText.setText(topic.description);
+        TopicData topic = topics.get(position);
+        holder.titleTextView.setText(topic.getTitulo());
+        holder.descriptionTextView.setText(topic.getDescripcionGeneral());
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ContentActivity.class);
-            intent.putExtra("TOPIC_TITLE", topic.title);
-            intent.putExtra("TOPIC_CONTENT", topic.description);
+            intent.putExtra("TOPIC_TITLE", topic.getTitulo());
+            intent.putExtra("TOPIC_DESCRIPTION", topic.getDescripcionGeneral());
+            
+            // Convertir la lista de puntos principales a un array
+            List<String> points = topic.getPuntosPrincipales();
+            if (points != null && !points.isEmpty()) {
+                String[] pointsArray = points.toArray(new String[0]);
+                intent.putExtra("TOPIC_POINTS", pointsArray);
+            }
+
+            // Formatear los enlaces
+            List<TopicData.LinkData> links = topic.getLinksRecomendados();
+            if (links != null && !links.isEmpty()) {
+                StringBuilder linksText = new StringBuilder("Enlaces recomendados:\n\n");
+                for (TopicData.LinkData link : links) {
+                    linksText.append("• ").append(link.getTituloLink())
+                            .append("\n  ").append(link.getUrl()).append("\n\n");
+                }
+                intent.putExtra("TOPIC_LINKS", linksText.toString());
+            }
+
             context.startActivity(intent);
         });
     }
 
     @Override
     public int getItemCount() {
-        return topics.size();
+        return topics != null ? topics.size() : 0;
     }
 
     static class TopicViewHolder extends RecyclerView.ViewHolder {
-        TextView titleText;
-        TextView descriptionText;
+        TextView titleTextView;
+        TextView descriptionTextView;
 
         TopicViewHolder(View itemView) {
             super(itemView);
-            titleText = itemView.findViewById(R.id.topicTitle);
-            descriptionText = itemView.findViewById(R.id.topicDescription);
+            titleTextView = itemView.findViewById(R.id.titleTextView);
+            descriptionTextView = itemView.findViewById(R.id.descriptionTextView);
         }
     }
 }

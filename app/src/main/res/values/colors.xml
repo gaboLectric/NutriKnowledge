@@ -1,32 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#006D77</color>
-    <color name="primary_variant">#0093B8</color>
-    <color name="primary_dark">#004D40</color>
-    <color name="on_primary">#FFFFFF</color>
-    <color name="secondary">#00FFD1</color>
-    <color name="secondary_variant">#00D4B0</color>
-    <color name="secondary_dark">#00897B</color>
-    <color name="on_secondary">#000000</color>
-    <color name="highlight_bg">#FFFFFF</color>
-    <color name="highlight_bg_dark">#22272b</color>
+    <!-- Colores principales -->
+    <color name="primary">#2196F3</color>
+    <color name="primary_dark">#1976D2</color>
+    <color name="primary_light">#BBDEFB</color>
+    
+    <!-- Colores secundarios -->
+    <color name="secondary">#FFC107</color>
+    <color name="secondary_dark">#FFA000</color>
+    <color name="secondary_light">#FFECB3</color>
+    
+    <!-- Colores de fondo -->
     <color name="background">#FFFFFF</color>
     <color name="surface">#FFFFFF</color>
-    <color name="on_surface">#222222</color>
-    <color name="sky_blue">#8ECAE6</color>
-    <color name="blue_green">#219EBC</color>
-    <color name="prussian_blue">#023047</color>
-    <color name="selective_yellow">#FFB703</color>
-    <color name="ut_orange">#FB8500</color>
-    <!-- App palette highlights, all with 20% opacity for overlays -->
-    <color name="highlight_yellow">#33FFF9C4</color>
-    <color name="highlight_green">#33219EBC</color>
-    <color name="highlight_blue">#338ECAE6</color>
-    <color name="highlight_orange">#33FB8500</color>
-    <color name="highlight_pink">#33F8BBD0</color>
-    <color name="highlight_teal">#3300BFAE</color>
-    <color name="highlight_purple">#334B3F72</color>
-    <color name="highlight_red">#33E57373</color>
-    <color name="highlight_brown">#33A1887F</color>
-    <color name="highlight_gray">#339E9E9E</color>
+    <color name="card_background">#FFFFFF</color>
+    
+    <!-- Colores de texto -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_hint">#BDBDBD</color>
+    
+    <!-- Colores de estado -->
+    <color name="error">#F44336</color>
+    
+    <!-- Colores básicos -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray">#757575</color>
+    
+    <!-- Colores de navegación -->
+    <color name="bottom_nav_item_color">#FF2196F3</color>
+
+    <!-- Colores de resaltado -->
+    <color name="highlight_yellow">#FFF9C4</color>
+    <color name="highlight_green">#C8E6C9</color>
+    <color name="highlight_pink">#F8BBD0</color>
+    <color name="highlight_blue">#BBDEFB</color>
+    <color name="highlight_orange">#FFE0B2</color>
+    <color name="highlight_purple">#E1BEE7</color>
+    <color name="highlight_teal">#B2DFDB</color>
+    <color name="highlight_red">#FFCDD2</color>
+    <color name="highlight_brown">#D7CCC8</color>
+    <color name="highlight_gray">#F5F5F5</color>
 </resources>
