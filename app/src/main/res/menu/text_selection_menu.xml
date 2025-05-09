@@ -6,4 +6,9 @@
         android:title="Resaltar"
         android:icon="@drawable/ic_highlight"
         app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_remove_highlight"
+        android:title="Eliminar resaltado"
+        android:icon="@drawable/ic_remove_highlight"
+        app:showAsAction="ifRoom"/>
 </menu> 
